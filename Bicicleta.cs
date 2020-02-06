@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bicicleta.Clases
+namespace bicicleta
 {
     class Bicicleta
     {
+        //tipos de datos
+        public enum lista_colores { Rojo, Negro, Azul, Naranja };
+
         //Atributos
         public string Marca;
-        public string Color;
+        //public string Color;
         public string Material;
         public float TamanoMarco = 0F;
         public float TamanoLlanta = 0F;
@@ -18,6 +21,8 @@ namespace Bicicleta.Clases
         public short CambioActual;
         public short VelocidadActual;
         public short VelocidadMaxima;
+     
+        public lista_colores Color;
 
         //Constructor
         public Bicicleta()
@@ -26,9 +31,36 @@ namespace Bicicleta.Clases
             {
 
             }
-            catch(Exception Error)
+            catch (Exception Error)
             {
 
+            }
+        }
+
+        public Bicicleta(string Marca, string Material, float TamanoLlanta, float TamanoMarco)
+        {
+            string msg_error = "";
+            try
+            {
+                if (Marca.Length >= 2) this.Marca = Marca.ToUpper();
+                else
+                {
+                    msg_error = "Error en el atributo marca";
+                    throw new Exception("Error en el atributo marca");
+                }
+
+                this.Material = Material;
+                this.TamanoLlanta = TamanoLlanta;
+                this.TamanoMarco = TamanoMarco;
+
+                VelocidadActual = 0;
+                VelocidadMaxima = 50;
+                CambioActual = 1;
+                NumeroCambios = 7;
+            }
+            catch (Exception Error)
+            {
+                 throw new Exception("" + Error);
             }
         }
 
